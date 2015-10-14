@@ -1,0 +1,11 @@
+<?php
+
+require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/container.php';
+
+$app = new \Symfony\Component\Console\Application('blackjack', '0.0.1');
+$app->addCommands([
+    (new \Blackjack\Command\RunServerCommand())->setContainer($container),
+]);
+$app->run();
+

@@ -1,0 +1,22 @@
+{
+  "name": "blackjack-php-server",
+  "require": {
+    "react/socket": "^0.4.2",
+    "pimple/pimple": "^3.0",
+    "symfony/console": "^2.7",
+    "psr/log": "^1.0",
+    "react/promise": "^2.2",
+    "react/promise-timer": "^1.0",
+    "cboden/ratchet": "^0.3.3",
+    "icecave/collections": "^1.1"
+  },
+  "autoload": {
+    "files": [
+      "src/functions.php",
+      "src/Promise/functions.php"
+    ],
+    "psr-4": {
+      "Blackjack\\": "src/"
+    }
+  }
+}
