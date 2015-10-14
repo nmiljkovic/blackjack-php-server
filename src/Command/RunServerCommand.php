@@ -21,9 +21,10 @@ class RunServerCommand extends Command
     {
         $this->setName('run-server');
         $this->addOption('port', 'p', InputOption::VALUE_REQUIRED, 'Server port', 8000);
+        $this->addOption('websocket-port', null, InputOption::VALUE_REQUIRED, 'Websocket port', 8001);
     }
 
-    public function run(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         /** @var TableManager $tableManager */
         $tableManager = $this->container['table_manager'];
@@ -40,10 +41,10 @@ class RunServerCommand extends Command
         $tableManager->createTable();
 
         $socket = new \React\Socket\Server($loop);
-        $socket->listen(8001, '0.0.0.0');
+        $socket->listen($input->getOption('websocket-port'), '0.0.0.0');
         new IoServer(new HttpServer($webSocketServer), $socket, $loop);
 
-        $socketServer->listen(8000);
+        $socketServer->listen($input->getOption('port'));
         $loop->run();
     }
 
